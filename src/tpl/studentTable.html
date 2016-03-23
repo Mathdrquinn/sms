@@ -1,0 +1,25 @@
+<div class="idea">
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Major</th>
+        <th>Credit Hours</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="(key, student) in table.students" ng-click="App.toggleStarStudent(key, student)">
+        <td>{{key}}</td>
+        <td>{{ student.lastName }}, {{ student.firstName }}</td>
+        <td>{{ student.major }}</td>
+        <td>{{ student.creditHours }}</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="#">+ Add</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

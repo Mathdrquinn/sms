@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Management System</title>
+  <link rel="stylesheet" href="src/css/styles.css">
+</head>
+<body ng-app="app" ng-controller="mainController as App">
+  <div class="flex-container">
+    <header>
+      <div class="container" ng-cloak>{{ App.abbrTitle }}</div>
+    </header>
+    <main>
+      <div class="container">
+        <h1 class="color-blue" ng-cloak>{{ App.title }}</h1>
+        <h3 class="color-blue" ng-cloak>{{ App.description }}</h3>
+        <div class="col-md-6">
+          <student-table />
+        </div>
+        <div class="col-md-6">
+          <student-details />
+        </div>
+      </div>
+    </main>
+    <footer>
+      <div class="container" open="App.modal" modal-student="App.starStudent">footer</div>
+    </footer>
+    <student-modal />
+  </div>
+  <!-- Angular -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.2/angular.min.js"></script>
+  <!-- <script stpe="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.min.js"></script> -->
+  <!-- Firebase -->
+  <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+  <!-- Angular Fire -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angularFire/1.1.4/angularfire.min.js"></script>
+  <!-- Main Scripts -->
+  <script type="text/javascript" src="src/js/bundle.js"></script>
+</body>
+</html>
