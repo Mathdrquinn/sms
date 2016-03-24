@@ -1,0 +1,9 @@
+{
+  "firebase": "studentmanagementsys",
+  "public": "public",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**"
+  ]
+}

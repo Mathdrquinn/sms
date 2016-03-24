@@ -17,7 +17,7 @@ var gulp = require('gulp');
 gulp.task('express', function() {
   var app = express();
   app.use(liveReload({port: 4002}));
-  app.use(express.static( __dirname ));
+  app.use(express.static( __dirname + '/public' ));
   app.listen(4000);
 });
 
@@ -44,12 +44,12 @@ function notifyLiveReload(event) {
 gulp.task('build-css', function() {
   console.log('build-css');
   return sass('dev/scss/styles.scss', { style: 'expanded' })
-  .pipe(gulp.dest('src/css'))
+  .pipe(gulp.dest('public/src/css'))
   .pipe(autoPrefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1'))
-  .pipe(gulp.dest('src/css'))
+  .pipe(gulp.dest('public/src/css'))
   .pipe(rename({suffix: '.min'}))
   .pipe(minifycss())
-  .pipe(gulp.dest('src/css'));
+  .pipe(gulp.dest('public/src/css'));
 });
 
 gulp.task('build-js', function() {
@@ -59,17 +59,17 @@ gulp.task('build-js', function() {
     .pipe(concat('bundle.js'))
     .pipe(process.env.NODE_ENV === 'production' ? uglify() : gutil.noop())
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest('src/js'));
+    .pipe(gulp.dest('public/src/js'));
 });
 
 gulp.task('watch', function() {
   console.log('watch');
-  gulp.watch('./*.html', notifyLiveReload);
-  gulp.watch('src/tpl/*.html', notifyLiveReload);
+  gulp.watch('public/index.html', notifyLiveReload);
+  gulp.watch('public/src/tpl/*.html', notifyLiveReload);
   gulp.watch('dev/scss/**/*.scss', ['build-css']);
-  gulp.watch('src/css/**/*.css', notifyLiveReload);
+  gulp.watch('public/src/css/**/*.css', notifyLiveReload);
   gulp.watch('dev/js/**/*.js', ['build-js']);
-  gulp.watch('src/js/**/*.js', notifyLiveReload);
+  gulp.watch('public/src/js/**/*.js', notifyLiveReload);
 });
 
 
