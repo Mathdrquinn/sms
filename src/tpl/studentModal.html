@@ -1,6 +1,20 @@
-<div class="modal" ng-if="App.modal">
-  <div class="modal-box">
-    <h1>Modal</h1>
-    <p>stuff... {{ studentModal.works }}</p>
+<div class="modal" ng-show="studentModal.open">
+  <div class="modal__box">
+    <a href="#" ng-click="studentModal.toggleModal(false)">Close</a>
+    <h1>Edit Student {{ studentModal.student.$id }}</h1>
+    <input type="text" ng-model="studentModal.student.firstName"/>
+    <input type="text" ng-model="studentModal.student.lastName"/>
+    <select name="major" ng-model="studentModal.student.major">
+      <option value="">-- Choose a Major --</option>
+      <option value="Design">Design</option>
+      <option value="Education">Education</option>
+      <option value="Mischief">Mischief</option>
+      <option value="Music">Music</option>
+      <option value="Public Service">Public Service</option>
+    </select>
+    <input type="number" ng-model="studentModal.student.creditHours"/>
+    <button class="modal__submit-btn" ng-click="studentModal.studentActions.save(studentModal.student, studentModal.studentActions.callback)">Save</button>
+    <button class="modal__delete-btn" ng-click="studentModal.studentActions.delete(studentModal.student, studentModal.studentActions.callback)">Delete</button>
+    <p><pre><code>{{ studentModal | json }}</code></pre></p>
   </div>
 </div>

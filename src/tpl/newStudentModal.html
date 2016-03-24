@@ -1,0 +1,20 @@
+<div class="modal" ng-show="newStudentModal.open">
+  <div class="modal__box">
+    <a href="#" ng-click="newStudentModal.toggleModal(false)">Close</a>
+    <h1>Create Student</h1>
+    <input type="text" ng-model="newStudentModal.student.firstName" placeholder="First Name"/>
+    <input type="text" ng-model="newStudentModal.student.lastName" placeholder="Last Name"/>
+    <select name="major" ng-model="newStudentModal.student.major">
+      <option value="" ng-selected>-- Choose a Major --</option>
+      <option value="Design">Design</option>
+      <option value="Education">Education</option>
+      <option value="Mischief">Mischief</option>
+      <option value="Music">Music</option>
+      <option value="Public Service">Public Service</option>
+    </select>
+    <input type="number" ng-model="newStudentModal.student.creditHours" value="0"/>
+    <button class="modal__submit-btn" ng-click="newStudentModal.studentActions.add(newStudentModal.student, newStudentModal.studentActions.callback)">Save</button>
+    <button class="modal__delete-btn" ng-click="newStudentModal.toggleModal(false); newStudentModal.student = {}">Cancel</button>
+    <p><pre><code>{{ newStudentModal | json }}</code></pre></p>
+  </div>
+</div>

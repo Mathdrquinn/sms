@@ -18,14 +18,16 @@
           <student-table />
         </div>
         <div class="col-md-6">
-          <student-details />
+          <student-details open-modal="App.toggleStudentModal" student="App.starStudent"/>
         </div>
       </div>
     </main>
     <footer>
-      <div class="container" open="App.modal" modal-student="App.starStudent">footer</div>
+      <div class="container">footer</div>
+      <!-- <pre><code>{{App | json}}</code></pre> -->
     </footer>
-    <student-modal />
+    <student-modal  open="App.studentModal" toggle-modal="App.toggleStudentModal"></student-modal>
+    <new-student-modal  open="App.newStudentModal" toggle-modal="App.toggleNewStudentModal"/></new-student-modal>
   </div>
   <!-- Angular -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.2/angular.min.js"></script>

@@ -20,8 +20,8 @@ main {
 }
 
 .container {
-  max-width: 500px;
   margin: 0 auto;
+  max-width: 500px;
 }
 
 .flex-container {
@@ -45,12 +45,24 @@ main {
 }
 
 table {
+  border-spacing: 0;
+
   tr {
+
     th,
     td {
-      text-align: left;
       min-width: 80px;
+      padding: 3px 5px;
+      text-align: left;
     }
+  }
+}
+
+.clickable {
+  cursor: pointer;
+
+  &:hover {
+    background: lighten($purple, 25%);
   }
 }
 

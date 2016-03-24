@@ -1,6 +1,6 @@
 html,
 body {
-  color: #09050A;
+  color: #09050a;
   font-size: 14px;
   height: 100%;
   margin: 0;
@@ -10,7 +10,7 @@ body {
 
 header,
 footer {
-  background: #09050A;
+  background: #09050a;
   color: #fffffe;
   padding: 10px;
 }
@@ -22,8 +22,8 @@ main {
 }
 
 .container {
-  max-width: 500px;
   margin: 0 auto;
+  max-width: 500px;
 }
 
 .flex-container {
@@ -64,10 +64,21 @@ main {
           justify-content: space-between;
 }
 
+table {
+  border-spacing: 0;
+}
 table tr th,
 table tr td {
-  text-align: left;
   min-width: 80px;
+  padding: 3px 5px;
+  text-align: left;
+}
+
+.clickable {
+  cursor: pointer;
+}
+.clickable:hover {
+  background: #d0b2dd;
 }
 
 .float-left {
@@ -83,8 +94,11 @@ table tr td {
 }
 
 .modal {
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
   background: rgba(0, 0, 0, 0.5);
-  position: absolute;
+  bottom: 0;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
@@ -94,21 +108,18 @@ table tr td {
   -webkit-justify-content: space-around;
       -ms-flex-pack: distribute;
           justify-content: space-around;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
-  bottom: 0;
   left: 0;
+  position: absolute;
   right: 0;
   top: 0;
 }
-.modal .modal-box {
+.modal .modal__box {
   background: #fffffe;
   border-radius: 3px;
-  box-shadow: 0px 1px 4px #09050A;
+  box-shadow: 0 1px 4px #09050a;
   display: inline-block;
-  min-width: 50%;
   min-height: 50%;
+  min-width: 50%;
   padding: 10px;
   position: relative;
 }

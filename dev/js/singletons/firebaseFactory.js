@@ -5,14 +5,41 @@
 
   $angular
     .module('app')
-    .factory('firebaseFactory', firebaseFactory);
+    .factory('FirebaseFactory', firebaseFactory);
 
-  firebaseFactory.$inject = ['$firebaseObject'];
-  function firebaseFactory($firebaseObject) {
+  firebaseFactory.$inject = ['$firebaseObject', '$firebaseArray'];
+  function firebaseFactory($firebaseObject, $firebaseArray) {
     var ref = new Firebase("https://studentmanagementsys.firebaseio.com");
+    var getStudentsData = $firebaseArray(ref.child('students'));
 
     return {
-      students: $firebaseObject(ref.child('students'))
+      students: getStudentsData,
+      student: student,
+      saveStudentData: saveStudentData,
+      deleteStudentData: deleteStudentData,
+      addStudent: addStudent,
+    }
+
+    function student(id) {
+      return $firebaseObject(ref.child('students').child(id));
+    }
+
+    function saveStudentData(student, cb) {
+      var answer = confirm('are ya sure?');
+      console.log('confirm', answer);
+
+      if (answer) {
+        debugger;
+        student.$save().then(cb, cb);
+      }
+    }
+
+    function deleteStudentData(student, cb) {
+      student.$remove().then(cb, cb);
+    }
+
+    function addStudent(newStudent, cb) {
+      getStudentsData.$add(newStudent).then(cb);
     }
   }
 
