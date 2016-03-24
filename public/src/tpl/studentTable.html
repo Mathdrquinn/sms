@@ -1,4 +1,4 @@
-<div class="idea">
+<div class="table-container">
   <table>
     <thead>
       <tr>
@@ -9,7 +9,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr class="clickable" ng-repeat="(key, student) in table.students" ng-click="App.toggleStarStudent(student)">
+      <tr class="clickable" ng-repeat="(key, student) in table.students" ng-click="table.openDetails(student)">
         <td>{{student.$id}}</td>
         <td>{{ student.lastName }}, {{ student.firstName }}</td>
         <td>{{ student.major }}</td>
@@ -17,7 +17,7 @@
       </tr>
       <tr>
         <td>
-          <a href="#" ng-click="App.toggleNewStudentModal()">+ Add</a>
+          <a href="#" ng-click="table.openNewStudentModal()">+ Add</a>
         </td>
       </tr>
     </tbody>

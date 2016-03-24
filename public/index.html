@@ -3,32 +3,68 @@
 <head>
   <meta charset="UTF-8">
   <title>Student Management System</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.0/foundation.min.css">
   <link rel="stylesheet" href="src/css/styles.css">
 </head>
 <body ng-app="app" ng-controller="mainController as App">
-  <div class="flex-container">
-    <header>
-      <div class="container" ng-cloak>{{ App.abbrTitle }}</div>
+  <div id="container">
+
+    <!-- Header -->
+    <header id="header" class="top-bar">
+
+      <div class="row">
+
+        <div class="top-bar-left">
+          <ul class="dropdown menu" data-dropdown-menu="" role="menubar" data-dropdownmenu="tfx06o-dropdownmenu">
+            <li class="menu-text" role="menuitem" tabindex="0">{{ App.abbrTitle }}</li>
+          </ul>
+        </div>
+
+      </div>
+
     </header>
-    <main>
-      <div class="container">
+
+    <br>
+
+    <div class="row">
+
+      <!-- Title -->
+      <div class="column">
         <h1 class="color-blue" ng-cloak>{{ App.title }}</h1>
         <h3 class="color-blue" ng-cloak>{{ App.description }}</h3>
-        <div class="col-md-6">
-          <student-table />
-        </div>
-        <div class="col-md-6">
-          <student-details open-modal="App.toggleStudentModal" student="App.starStudent"/>
-        </div>
       </div>
-    </main>
-    <footer>
-      <div class="container">footer</div>
-      <!-- <pre><code>{{App | json}}</code></pre> -->
+
+    </div>
+
+    <div class="row">
+
+      <!-- Main column left -->
+      <div class="large-7 columns">
+        <student-table open-details="App.toggleStarStudent" open-new-student-modal="App.toggleNewStudentModal"/>
+      </div>
+
+      <!-- Main colum right -->
+      <div class="large-5 columns">
+        <student-details open-modal="App.toggleStudentModal" student="App.starStudent"/>
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer" class="footer row column">
+
+      <ul class="menu">
+        <li>{{ App.title }}</li>
+      </ul>
+
     </footer>
-    <student-modal  open="App.studentModal" toggle-modal="App.toggleStudentModal"></student-modal>
-    <new-student-modal  open="App.newStudentModal" toggle-modal="App.toggleNewStudentModal"/></new-student-modal>
+
   </div>
+
+  <!-- Modals -->
+  <student-modal  open="App.studentModal" toggle-modal="App.toggleStudentModal"></student-modal>
+  <new-student-modal  open="App.newStudentModal" toggle-modal="App.toggleNewStudentModal"/></new-student-modal>
+
   <!-- Angular -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.2/angular.min.js"></script>
   <!-- <script stpe="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.min.js"></script> -->

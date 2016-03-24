@@ -1,20 +1,89 @@
 <div class="modal" ng-show="studentModal.open">
   <div class="modal__box">
-    <a href="#" ng-click="studentModal.toggleModal(false)">Close</a>
-    <h1>Edit Student {{ studentModal.student.$id }}</h1>
-    <input type="text" ng-model="studentModal.student.firstName"/>
-    <input type="text" ng-model="studentModal.student.lastName"/>
-    <select name="major" ng-model="studentModal.student.major">
-      <option value="">-- Choose a Major --</option>
-      <option value="Design">Design</option>
-      <option value="Education">Education</option>
-      <option value="Mischief">Mischief</option>
-      <option value="Music">Music</option>
-      <option value="Public Service">Public Service</option>
-    </select>
-    <input type="number" ng-model="studentModal.student.creditHours"/>
-    <button class="modal__submit-btn" ng-click="studentModal.studentActions.save(studentModal.student, studentModal.studentActions.callback)">Save</button>
-    <button class="modal__delete-btn" ng-click="studentModal.studentActions.delete(studentModal.student, studentModal.studentActions.callback)">Delete</button>
-    <p><pre><code>{{ studentModal | json }}</code></pre></p>
+
+    <!-- Close Modal-->
+    <a class="float-right" href="#" ng-click="studentModal.open = false">X</a>
+
+    <!-- Title-->
+    <div class="row">
+      <div class="column">
+        <h1>Edit student: <span class="color-blue">{{ studentModal.student.$id }}</span></h1>
+      </div>
+    </div>
+
+    <!-- Form -->
+    <form novalidate name="editStudent">
+      <div class="row">
+        <div class="column">
+
+          <!-- firstName -->
+          <div class="row">
+            <div class="small-3 columns">
+              <label for="first-name" class="middle">First Name</label>
+            </div>
+            <div class="small-9 columns">
+              <input type="text" ng-model="studentModal.student.firstName"/>
+            </div>
+          </div>
+
+          <!-- lastName -->
+          <div class="row">
+            <div class="small-3 columns">
+              <label for="last-name" class="middle">Last Name</label>
+            </div>
+            <div class="small-9 columns">
+              <input type="text" ng-model="studentModal.student.lastName"/>
+            </div>
+          </div>
+
+          <!-- Major -->
+          <div class="row">
+            <div class="small-3 columns">
+              <label for="major" class="middle">Major</label>
+            </div>
+            <div class="small-9 columns">
+              <select name="major" ng-model="studentModal.student.major">
+                <option value="">-- Choose a Major --</option>
+                <option value="Design">Design</option>
+                <option value="Education">Education</option>
+                <option value="Mischief">Mischief</option>
+                <option value="Music">Music</option>
+                <option value="Public Service">Public Service</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Credit Hours -->
+          <div class="row">
+            <div class="small-3 columns">
+              <label for="creitHours" class="middle">Credit Hours</label>
+            </div>
+            <div class="small-9 columns">
+              <input type="number" ng-model="studentModal.student.creditHours"/>
+            </div>
+          </div>
+
+          <!-- Buttons -->
+          <div class="button-bar">
+            <ul class="button-group float-right">
+              <li>
+                <button class="modal__submit-btn small button success" ng-click="studentModal.confirmationModalEdit = true;">Save</button>
+            </ul>
+            <ul class="button-group float-right">
+              <li>
+                <button class="modal__delete-btn small button alert" ng-click="studentModal.confirmationModalDelete = true;">Delete</button>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </form>
+
   </div>
+
+  <!-- Confirmation Modal -->
+  <confirmation-modal open="studentModal.confirmationModalEdit" proceed="studentModal.submitEdit" confirm-text="Submit" deny-text="Cancel" text="edit this user?"></confirmation-modal>
+  <!-- Confirmation Modal -->
+  <confirmation-modal open="studentModal.confirmationModalDelete" proceed="studentModal.submitDelete" confirm-text="Delete" deny-text="Cancel" text="Delete this user"></confirmation-modal>
 </div>

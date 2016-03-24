@@ -1,21 +1,26 @@
 (function($angular) {
   'use strict';
 
-  console.log(3);
-
   $angular
     .module('app')
     .directive('studentTable', studentTable)
     .directive('studentDetails', studentDetails)
     .directive('studentModal', studentModal)
-    .directive('newStudentModal', newStudentModal);
+    .directive('newStudentModal', newStudentModal)
+    .directive('confirmationModal', confirmationModal);
 
   function studentTable() {
     var directive = {
+      bindToController: true,
       controller: studentTableController,
       controllerAs: 'table',
       templateUrl: 'src/tpl/studentTable.html',
-      restrict: 'E'
+      restrict: 'E',
+      replace: true,
+      scope: {
+        openDetails: '=',
+        openNewStudentModal: '='
+      }
     };
 
     return directive;
@@ -46,8 +51,6 @@
     // studentDetailsController.$inject = ['$rootScope'];
     function studentDetailsController() {
       var vm = this;
-
-      console.log('studentDetailsController', vm);
     }
   }
 
@@ -70,19 +73,39 @@
     function studentModalController($scope, FirebaseFactory) {
       var vm = this;
 
+      vm.confirmationModalEdit = false;
+      vm.confirmationModalDelete = false;
+      vm.submitDelete = submitDelete;
+      vm.submitEdit = submitEdit;
       vm.studentActions = {
         save: FirebaseFactory.saveStudentData,
         delete: FirebaseFactory.deleteStudentData,
         add: FirebaseFactory.addStudent,
-        callback: callback
       };
 
-      function callback() {
+      function submitDelete() {
+        FirebaseFactory.deleteStudentData(vm.student, deleteSuccessCallback, errorCallback)
+      }
+
+      function submitEdit() {
+        FirebaseFactory.saveStudentData(vm.student, editSuccessCallback, errorCallback)
+      }
+
+      function deleteSuccessCallback(ref) {
         vm.toggleModal(false);
+        vm.confirmationModalDelete = false;
+      }
+
+      function editSuccessCallback(ref) {
+        vm.toggleModal(false);
+        vm.confirmationModalEdit = false;
+      }
+
+      function errorCallback(err) {
+        return err;
       }
 
       $scope.$on('open-edit-student-modal', function(event, studentId) {
-        console.log('$on open modal')
         vm.student = FirebaseFactory.student(studentId);
       })
     }
@@ -107,18 +130,52 @@
     function newStudentModalController(FirebaseFactory) {
       var vm = this;
 
+      vm.confirmationModal = false;
+      vm.confirmationResponse = null;
       vm.studentActions = {
         save: FirebaseFactory.saveStudentData,
         delete: FirebaseFactory.deleteStudentData,
         add: FirebaseFactory.addStudent,
-        callback: callback
       };
+      vm.submit = submit;
 
-      function callback(ref) {
+      function successCallback(ref) {
         vm.toggleModal(false);
+        vm.confirmationModal = false;
+        vm.modal = false;
+        vm.student = {};
       }
 
-      console.log('newStudentModalController:', vm);
+      function errorCallback(err) {
+        return;
+      }
+
+      function submit() {
+        FirebaseFactory.addStudent(vm.student, successCallback, errorCallback);
+      }
+    }
+  }
+
+  function confirmationModal() {
+    var directive = {
+      bindToController: true,
+      scope: {
+        open: '=',
+        proceed: '=',
+        confirmText: '@',
+        denyText: '@',
+        text: '@'
+      },
+      controller: confirmationModalController,
+      controllerAs: 'confirmationModal',
+      templateUrl: 'src/tpl/confirmationModal.html',
+      restrict: 'E'
+    }
+
+    return directive;
+
+    function confirmationModalController() {
+      var vm = this;
     }
   }
 })(window.angular);

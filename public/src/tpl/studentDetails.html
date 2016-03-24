@@ -1,8 +1,13 @@
-<div class="student-details" ng-if="studentDetails.student">
-  <h3 class="student-details__title">{{ studentDetails.student.lastName }}, {{ studentDetails.student.firstName }}</h3>
-  <p class="student-details__copy">
-    <img class="student-details__image float-left margin-right" src="https://placebear.com/g/125/125" alt="bear">
-    {{ studentDetails.student.firstName }} {{ studentDetails.student.lastName }} is a {{ studentDetails.student.major }} major with {{ studentDetails.student.creditHours }} credit hours.
-    <button class="student-details__button btn" ng-click="studentDetails.openModal()">Edit</button>
-  </p>
+<div class="student-details media-object stack-for-small" ng-if="studentDetails.student">
+  <div class="media-object-section">
+    <img class="student-details__image thumbnail" src="https://placebear.com/g/125/125" alt="bear">
+  </div>
+  <div class="media-object-section">
+    <h3 class="student-details__title">{{ studentDetails.student.lastName }}, {{ studentDetails.student.firstName }}</h3>
+    <p class="student-details__copy">
+      {{ studentDetails.student.firstName }} {{ studentDetails.student.lastName }} is a {{ studentDetails.student.major }} major with {{ studentDetails.student.creditHours }} credit hours.
+      <br />
+      <button class="student-details__button button hollow tiny" ng-click="studentDetails.openModal()">Edit</button>
+    </p>
+  </div>
 </div>

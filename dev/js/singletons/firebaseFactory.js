@@ -1,8 +1,6 @@
 (function($angular) {
   'use strict';
 
-  console.log(4);
-
   $angular
     .module('app')
     .factory('FirebaseFactory', firebaseFactory);
@@ -24,22 +22,16 @@
       return $firebaseObject(ref.child('students').child(id));
     }
 
-    function saveStudentData(student, cb) {
-      var answer = confirm('are ya sure?');
-      console.log('confirm', answer);
-
-      if (answer) {
-        debugger;
-        student.$save().then(cb, cb);
-      }
+    function saveStudentData(student, successcb, errorcb) {
+      return student.$save().then(successcb, errorcb);
     }
 
-    function deleteStudentData(student, cb) {
-      student.$remove().then(cb, cb);
+    function deleteStudentData(student, successcb, errorcb) {
+      student.$remove().then(successcb, errorcb);
     }
 
-    function addStudent(newStudent, cb) {
-      getStudentsData.$add(newStudent).then(cb);
+    function addStudent(newStudent, successcb, errorcb) {
+      getStudentsData.$add(newStudent).then(successcb, errorcb);
     }
   }
 

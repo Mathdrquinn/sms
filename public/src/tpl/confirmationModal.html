@@ -1,0 +1,29 @@
+<div class="modal" ng-show="confirmationModal.open">
+  <div class="modal__box">
+
+    <!-- Close Modal-->
+    <a class="float-right" href="#" ng-click="confirmationModal.open = false">X</a>
+
+    <!-- Title-->
+    <div class="row">
+      <div class="column">
+        Are you should you'd like to {{ confirmationModal.text }}
+      </div>
+    </div>
+
+
+    <!-- Buttons -->
+    <div class="button-bar">
+      <ul class="button-group float-right">
+        <li>
+          <button class="modal__submit-btn small button success" ng-click="confirmationModal.proceed()">{{ confirmationModal.confirmText }}</button>
+      </ul>
+      <ul class="button-group float-right">
+        <li>
+          <button class="modal__delete-btn small button alert" ng-click="confirmationModal.open = false;">{{ confirmationModal.denyText }}</button>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</div>
